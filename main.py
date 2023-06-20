@@ -1,4 +1,5 @@
 import datetime
+import time
 done = False
 start = datetime.datetime.now()
 from playsound import playsound
@@ -34,9 +35,10 @@ def find_coord():
 
 def send_gv(code):
     pyg.hotkey('alt', 'tab')
-    pyg.click(x=1491, y=1003)
+    pyg.click(x=403, y=17)
+    pyg.click(x=459, y=1011)
     pyg.write(code)
-    pyg.click(x=1531, y=1010)
+    pyg.click(x=933, y=1011)
     pyg.hotkey('alt', 'tab')
 
 def find_between(s, first, last):
@@ -67,6 +69,7 @@ def score_notif():
     og = get_scores()
     while og == get_scores():
         print("no change")
+        time.sleep(1)
     return og
 
 def get_code():
@@ -77,11 +80,12 @@ def get_code():
         new = find_between(get_latest_tweet(), "Text ", " to 888222")[0]
     return new
 
-while not done:
-    org= score_notif()
-    if check_threes(org):
-        send_gv(get_code())
-        playsound('/yippe.mp3')
-    if datetime.datetime.now() - start >= datetime.timedelta(hours=4):
-        done = True
-playsound('yippee.mp3')
+print(get_scores())
+#while not done:
+#    org= score_notif()
+#    if check_threes(org):
+#        send_gv(get_code())
+#        playsound('/yippe.mp3')
+#    if datetime.datetime.now() - start >= datetime.timedelta(hours=4):
+#        done = True
+#playsound('yippee.mp3')
